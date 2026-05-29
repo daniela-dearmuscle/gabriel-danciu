@@ -1,1 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabriel Danciu — Personal Trainer Bruxelles</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--dark:#111111;--card:#181818;--border:#2a2a2a;--orange:#E8500A;--orange-light:#ff6b2b;--white:#f5f5f0;--muted:#888}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);line-height:1.6}
 
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:1.1rem;font-weight:700;letter-spacing:0.02em}
+.nav-logo span{color:var(--orange)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{background:var(--orange);color:#fff;padding:0.6rem 1.4rem;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;transition:background 0.2s}
+.nav-cta:hover{background:var(--orange-light)}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;padding-top:70px}
+.hero-content{display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem 4rem 4rem;z-index:2}
+.hero-badge{display:inline-block;background:rgba(232,80,10,0.15);border:1px solid rgba(232,80,10,0.4);color:var(--orange);padding:0.4rem 1rem;border-radius:2px;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.4rem,4vw,3.8rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.5rem}
+.hero h1 span{color:var(--orange)}
+.hero-sub{font-size:1.05rem;color:#aaa;line-height:1.7;margin-bottom:2.5rem;max-width:480px}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--orange);color:#fff;padding:0.9rem 2rem;border-radius:4px;text-decoration:none;font-size:0.9rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;transition:background 0.2s;display:inline-block}
+.btn-primary:hover{background:var(--orange-light)}
+.btn-secondary{background:transparent;color:var(--white);padding:0.9rem 2rem;border-radius:4px;border:1px solid var(--border);text-decoration:none;font-size:0.9rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;transition:border-color 0.2s;display:inline-block}
+.btn-secondary:hover{border-color:#555}
+
+.hero-stats{display:flex;gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.stat-item{display:flex;flex-direction:column;gap:0.2rem}
+.stat-num{font-size:1rem;font-weight:600;color:var(--white);letter-spacing:0.01em}
+.stat-label{font-size:0.72rem;color:var(--muted);letter-spacing:0.04em}
+
+.hero-image{position:relative;overflow:hidden}
+.hero-image img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.6) contrast(1.1)}
+.hero-image::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--black) 0%,transparent 40%)}
+
+section{padding:6rem 4rem}
+.section-tag{font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:0.75rem}
+.section-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;letter-spacing:-0.02em;line-height:1.15;margin-bottom:1.5rem}
+.section-title span{color:var(--orange)}
+
+.about{background:var(--dark)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:0 auto}
+.about-image-wrap{position:relative;border-radius:4px;overflow:hidden;aspect-ratio:3/4}
+.about-image-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.about-badge{position:absolute;bottom:1.5rem;left:1.5rem;background:var(--orange);color:#fff;padding:0.4rem 0.8rem;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;z-index:2}
+.about-text p{color:#bbb;font-size:0.97rem;line-height:1.85;margin-bottom:1.1rem}
+.certif-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem}
+.certif{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(232,80,10,0.1);border:1px solid rgba(232,80,10,0.3);padding:0.4rem 0.8rem;border-radius:2px;font-size:0.75rem;font-weight:600;color:var(--orange);letter-spacing:0.04em}
+
+.services{background:var(--black)}
+.services-intro{max-width:600px;margin:0 auto 4rem;text-align:center}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.service-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:border-color 0.3s,transform 0.3s}
+.service-card:hover{border-color:var(--orange);transform:translateY(-4px)}
+.service-img{height:200px;overflow:hidden}
+.service-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.6);transition:transform 0.4s}
+.service-card:hover .service-img img{transform:scale(1.05)}
+.service-body{padding:1.5rem}
+.service-num{font-size:0.7rem;font-weight:700;color:var(--orange);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem}
+.service-body h3{font-size:1.15rem;font-weight:700;margin-bottom:0.75rem;letter-spacing:-0.01em}
+.service-body p{font-size:0.88rem;color:#999;line-height:1.7;margin-bottom:1rem}
+.service-tag{font-size:0.75rem;color:#777;font-style:italic;border-left:2px solid var(--orange);padding-left:0.6rem;line-height:1.5}
+
+.testimonials{background:var(--dark)}
+.testi-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:0 auto 4rem}
+.testi-image{border-radius:4px;overflow:hidden;aspect-ratio:4/3}
+.testi-image img{width:100%;height:100%;object-fit:cover;filter:brightness(0.65) contrast(1.1)}
+.testi-intro p{color:#aaa;font-size:1rem;line-height:1.8}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1.5rem}
+.stars{color:var(--orange);font-size:0.9rem;margin-bottom:0.75rem;letter-spacing:0.1em}
+.testi-card p{font-size:0.88rem;color:#aaa;line-height:1.75;font-style:italic;margin-bottom:1.2rem}
+.testi-author{font-size:0.8rem;font-weight:600;color:var(--white)}
+.testi-role{font-size:0.75rem;color:var(--muted)}
+
+.faq{background:var(--black)}
+.faq-wrap{max-width:740px;margin:0 auto}
+.faq-intro{text-align:center;margin-bottom:3rem}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;background:none;border:none;color:var(--white);font-size:0.95rem;font-weight:600;text-align:left;padding:1.25rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-family:'Inter',sans-serif}
+.faq-icon{color:var(--orange);font-size:1.4rem;font-weight:300;flex-shrink:0;transition:transform 0.3s;line-height:1}
+.faq-icon.open{transform:rotate(45deg)}
+.faq-a{font-size:0.88rem;color:#999;line-height:1.8;padding-bottom:1.25rem;display:none}
+.faq-a.open{display:block}
+
+.booking{background:var(--dark);text-align:center}
+.booking-inner{max-width:700px;margin:0 auto}
+.booking-inner p{color:#aaa;font-size:1rem;line-height:1.8;margin-bottom:2rem}
+.booking-location{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(232,80,10,0.1);border:1px solid rgba(232,80,10,0.3);padding:0.5rem 1rem;border-radius:2px;font-size:0.82rem;color:var(--orange);font-weight:600;letter-spacing:0.05em;margin-bottom:2rem}
+.booking-embed{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:2.5rem;margin-bottom:2rem}
+.booking-embed p{color:#777;font-size:0.88rem;margin-bottom:1rem}
+.booking-embed a{color:var(--orange);text-decoration:none;font-weight:600}
+.booking-embed a:hover{text-decoration:underline}
+
+.contact{background:var(--black)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:4rem;align-items:start;max-width:1000px;margin:0 auto}
+.contact-info p{color:#aaa;font-size:0.95rem;line-height:1.8;margin-bottom:1.5rem}
+.contact-detail{display:flex;align-items:center;gap:0.75rem;font-size:0.88rem;color:#bbb;margin-bottom:0.75rem}
+.contact-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
+.form-group{margin-bottom:1.2rem}
+.form-group label{display:block;font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:#181818;border:1px solid var(--border);color:var(--white);padding:0.75rem 1rem;font-size:0.9rem;font-family:'Inter',sans-serif;border-radius:3px;outline:none;transition:border-color 0.2s}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--orange)}
+.form-group textarea{height:120px;resize:vertical}
+.form-group select option{background:#181818}
+.form-submit{width:100%;background:var(--orange);color:#fff;padding:1rem;border:none;border-radius:3px;font-size:0.9rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;font-family:'Inter',sans-serif}
+.form-submit:hover{background:var(--orange-light)}
+.form-msg{display:none;padding:0.75rem 1rem;border-radius:3px;font-size:0.88rem;margin-top:0.75rem}
+.form-msg.success{background:rgba(29,158,117,0.15);border:1px solid rgba(29,158,117,0.4);color:#5DCAA5;display:block}
+.form-msg.error{background:rgba(226,75,74,0.15);border:1px solid rgba(226,75,74,0.4);color:#F09595;display:block}
+
+footer{background:#080808;border-top:1px solid var(--border);padding:2.5rem 4rem}
+.footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.footer-name{font-weight:700;font-size:0.95rem}
+.footer-name span{color:var(--orange)}
+.footer-socials{display:flex;gap:1rem;align-items:center}
+.social-link{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:3px;border:1px solid var(--border);color:var(--muted);text-decoration:none;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;transition:border-color 0.2s,color 0.2s}
+.social-link:hover{border-color:var(--orange);color:var(--orange)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:0.78rem;color:var(--muted)}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-image{height:50vh}
+  .hero-image::after{background:linear-gradient(to top,var(--black) 0%,transparent 60%)}
+  .about-grid,.testi-header,.contact-grid{grid-template-columns:1fr}
+  .services-grid,.testi-grid{grid-template-columns:1fr}
+  section{padding:4rem 1.5rem}
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  footer{padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Gabriel <span>Danciu</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#temoignages">Témoignages</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Réserver une séance</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-content">
+    <span class="hero-badge">Personal Trainer · Bruxelles</span>
+    <h1>Reprendre le contrôle de votre <span>corps</span>. Pour de vrai.</h1>
+    <p class="hero-sub">Force, mobilité, posture — un accompagnement structuré et individualisé pour les personnes actives qui veulent progresser sans perdre de temps.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Réserver une séance</a>
+      <a href="#services" class="btn-secondary">Voir les services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">Certifié EREPS Niveau 4</span>
+        <span class="stat-label">Certification européenne reconnue</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">Force & conditionnement</span>
+        <span class="stat-label">Spécialiste Strength & Conditioning</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100% sur mesure</span>
+        <span class="stat-label">Chaque programme est fait pour vous</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1604480132736-44c188fe4d20?w=900&q=80" alt="Entraînement kettlebell">
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-image-wrap">
+      <img src="https://i.ibb.co/Hfrhzkf6/Gabi-Basic-Fit.jpg" alt="Gabriel Danciu personal trainer Bruxelles">
+      <div class="about-badge">EREPS Level 4 · Head Trainer</div>
+    </div>
+    <div class="about-text">
+      <p class="section-tag">À propos</p>
+      <h2 class="section-title">Je suis Gabriel Danciu — <span>coach certifié</span> à Bruxelles</h2>
+      <p>J'accompagne les personnes actives — souvent prises dans un rythme de travail intense et sédentaire — qui souhaitent retrouver de la force, perdre du poids, améliorer leur mobilité et leur posture, sans perdre de temps dans des entraînements improvisés.</p>
+      <p>Mon approche repose sur un travail progressif, structuré et individualisé : comprendre votre corps, identifier et corriger les déséquilibres liés à la position assise, renforcer les bases, puis construire une vraie progression — séance après séance, semaine après semaine.</p>
+      <p>Mon objectif n'est pas seulement de vous faire « faire du sport ». C'est de vous aider à reprendre confiance dans votre corps, à bouger avec plus d'aisance, et à développer une force durable — utile dans la vie quotidienne comme dans la performance sportive.</p>
+      <p>Je travaille en anglais et en français, et j'adapte chaque programme à votre niveau, votre emploi du temps et vos objectifs réels.</p>
+      <div class="certif-row">
+        <span class="certif">✦ EREPS Niveau 4</span>
+        <span class="certif">✦ NASM Certified</span>
+        <span class="certif">✦ Strength & Conditioning</span>
+        <span class="certif">✦ EN · FR</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-intro">
+    <p class="section-tag">Services</p>
+    <h2 class="section-title">Un accompagnement <span>adapté à vous</span></h2>
+    <p style="color:#aaa;font-size:0.95rem">Chaque service est pensé pour s'ajuster à votre niveau, votre rythme de vie et vos objectifs réels.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-img"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=75" alt="1-on-1 Training"></div>
+      <div class="service-body">
+        <div class="service-num">01 — Présentiel</div>
+        <h3>1-on-1 Training</h3>
+        <p>Un accompagnement entièrement personnalisé en présentiel, séance après séance. Nous travaillons sur votre force, votre posture, votre mobilité et la perte de poids — avec des corrections techniques précises et une progression adaptée à votre corps et à votre mode de vie sédentaire. Chaque séance est pensée pour vous faire avancer avec sécurité et confiance.</p>
+        <div class="service-tag">Pour vous si vous voulez un cadre clair, un suivi attentif et un entraînement entièrement adapté à vous.</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-img"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=75" alt="Online Coaching"></div>
+      <div class="service-body">
+        <div class="service-num">02 — À distance</div>
+        <h3>Online Coaching</h3>
+        <p>Un programme structuré selon vos objectifs, votre emploi du temps, votre niveau et le matériel dont vous disposez. Nous faisons le point régulièrement en ligne pour ajuster le plan et maintenir une progression réaliste. Suivi disponible par WhatsApp : posez vos questions et envoyez vos vidéos pour des retours techniques.</p>
+        <div class="service-tag">Pour vous si vous voulez avancer avec méthode, même sans séances en présentiel chaque semaine.</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-img"><img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=500&q=75" alt="Strength Programs"></div>
+      <div class="service-body">
+        <div class="service-num">03 — Long terme</div>
+        <h3>Strength Programs</h3>
+        <p>Des programmes individualisés sur 3, 6 ou 9 mois pour construire de vraies bases physiques — force, posture, perte de poids, progrès mesurables. Vous vous entraînez de manière autonome, avec des points de suivi réguliers en ligne ou en présentiel pour ajuster, corriger et maintenir une progression claire.</p>
+        <div class="service-tag">Pour vous si vous souhaitez un plan clair, progressif et durable pour vous entraîner avec plus d'autonomie.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="temoignages">
+  <div class="testi-header">
+    <div class="testi-image">
+      <img src="https://images.unsplash.com/photo-1609899537878-48b93bba1eb1?w=800&q=75" alt="Entraînement">
+    </div>
+    <div class="testi-intro">
+      <p class="section-tag">Témoignages</p>
+      <h2 class="section-title">Ce que disent <span>mes clients</span></h2>
+      <p>Des personnes actives, souvent sceptiques au départ, qui ont retrouvé de la force, de la confiance et du plaisir à bouger.</p>
+    </div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>« J'ai commencé parce que je passais beaucoup de temps assis au travail et mon corps devenait raide, fatigué, moins mobile. Dès les premières séances, j'ai apprécié son approche structurée et rassurante. Après quelques semaines, je me sens déjà plus fort, plus stable et plus confiant dans mes mouvements. »</p>
+      <div class="testi-author">André</div>
+      <div class="testi-role">Architecte, 32 ans</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>« Gabriel est un coach très professionnel, attentif et précis. Ce que j'ai le plus apprécié, c'est qu'il ne propose pas un entraînement standard, mais un vrai travail construit autour de mes objectifs, de mes limites et de mon rythme. Je recommande à toute personne qui veut reprendre le sport sérieusement. »</p>
+      <div class="testi-author">Magali</div>
+      <div class="testi-role">Cadre, 48 ans</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★☆</div>
+      <p>« Les séances m'ont aidé à mieux comprendre mon corps, à améliorer ma posture et à reprendre confiance. J'ai particulièrement apprécié les corrections techniques. J'ai même perdu du poids et suis passée de XL à M en 6 mois — sans que ce soit un objectif premier de mes entraînements. »</p>
+      <div class="testi-author">Sophie</div>
+      <div class="testi-role">Cliente, 41 ans</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-intro">
+    <p class="section-tag">Questions fréquentes</p>
+    <h2 class="section-title">Tout ce que vous <span>voulez savoir</span></h2>
+  </div>
+  <div class="faq-wrap">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">À qui s'adressent vos séances ?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Mes séances s'adressent principalement aux personnes actives, souvent très occupées, qui passent beaucoup de temps assises et souhaitent retrouver de la force, perdre du poids, améliorer leur mobilité et leur posture. Que vous repreniez le sport, que vous ayez des tensions liées au travail de bureau ou que vous vouliez progresser de manière plus structurée, l'accompagnement est adapté à votre niveau et à vos objectifs.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Dois-je déjà être en forme pour commencer ?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Non. Vous n'avez pas besoin d'être déjà sportif·ve pour commencer. Mon rôle est justement de vous aider à construire des bases solides, progressivement, sans brûler les étapes. Chaque séance est pensée pour vous faire avancer avec sécurité, clarté et confiance.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Quel type de résultats puis-je attendre ?<span class="faq-icon">+</span></button>
+      <div class="faq-a">L'objectif est de créer un progrès réel au fil des séances : plus de force, une meilleure posture, plus de mobilité, une perte de poids durable si c'est votre objectif, davantage d'énergie et une meilleure confiance dans votre corps. Le travail est progressif et individualisé, afin que les résultats soient durables et utiles dans votre vie quotidienne.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Comment se déroule la première séance ?<span class="faq-icon">+</span></button>
+      <div class="faq-a">La première séance permet de faire le point sur vos objectifs, votre niveau actuel, vos habitudes de mouvement, vos éventuelles tensions et votre mode de vie. À partir de là, je construis un accompagnement adapté, avec des exercices ciblés pour corriger les déséquilibres, renforcer les bases et vous faire progresser de manière structurée.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Proposez-vous des programmes sur plusieurs mois ?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Oui. Je propose des programmes individualisés sur 3, 6 ou 9 mois pour les personnes qui souhaitent s'entraîner de manière plus autonome. Je construis un programme adapté à vos objectifs, votre emploi du temps et votre matériel — avec des points de suivi réguliers en ligne ou en présentiel pour ajuster, corriger et maintenir une progression claire.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Le suivi à distance est-il vraiment efficace ?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Oui, à condition que le programme soit bien construit et le suivi régulier. Dans le cadre du coaching en ligne, nous faisons le point régulièrement pour ajuster votre plan. Vous pouvez également m'envoyer vos vidéos d'exercices via WhatsApp pour obtenir des retours techniques précis — ce qui permet une vraie progression même à distance.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Où se déroulent les séances en présentiel ?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Les séances en présentiel se déroulent au Basic Fit Yser, à Bruxelles (Boudewijnlaan 27). C'est une salle bien équipée, accessible et idéalement située. Si vous avez des questions sur l'accès ou l'organisation pratique, n'hésitez pas à me contacter directement.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <p class="section-tag" style="text-align:center">Réserver</p>
+    <h2 class="section-title">Prêt·e à <span>commencer</span> ?</h2>
+    <p>Réservez directement une séance en présentiel au Basic Fit Yser. Choisissez votre créneau et confirmez votre place en quelques secondes.</p>
+    <div class="booking-location">📍 Basic Fit Yser · Boudewijnlaan 27 · Bruxelles</div>
+    <div class="booking-embed">
+      <p>Le système de réservation en ligne sera disponible très prochainement via <strong>Cal.com</strong> — gratuit, synchronisé avec Google Calendar.</p>
+      <p>En attendant, <a href="#contact">contactez-moi directement</a> pour réserver votre première séance ou votre appel découverte.</p>
+      <a href="#contact" class="btn-primary" style="margin-top:1rem;display:inline-block">Me contacter pour réserver</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p class="section-tag">Contact</p>
+      <h2 class="section-title">Une question ? <span>Écrivez-moi.</span></h2>
+      <p>Que ce soit pour en savoir plus sur mes services, poser une question pratique ou réserver votre première séance — je réponds en général sous 24h.</p>
+      <div class="contact-detail"><div class="contact-dot"></div>Séances au Basic Fit Yser, Bruxelles</div>
+      <div class="contact-detail"><div class="contact-dot"></div>Coaching en ligne disponible partout</div>
+      <div class="contact-detail"><div class="contact-dot"></div>Suivi WhatsApp inclus en online coaching</div>
+      <div class="contact-detail"><div class="contact-dot"></div>Je parle français et anglais</div>
+    </div>
+    <div class="contact-form">
+      <div class="form-group">
+        <label>Prénom &amp; Nom</label>
+        <input type="text" id="cf-name" placeholder="Ex : Marie Dupont">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="cf-email" placeholder="votre@email.com">
+      </div>
+      <div class="form-group">
+        <label>Je suis intéressé·e par</label>
+        <select id="cf-service">
+          <option value="">— Choisir un service —</option>
+          <option>1-on-1 Training (présentiel)</option>
+          <option>Online Coaching</option>
+          <option>Strength Program (3–9 mois)</option>
+          <option>Je ne sais pas encore</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="cf-msg" placeholder="Parlez-moi de votre situation, vos objectifs, vos questions..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Envoyer le message →</button>
+      <div class="form-msg" id="form-feedback"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-name">Gabriel <span>Danciu</span> — Personal Trainer Bruxelles</div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/gabrieldanciu.coach" class="social-link" target="_blank" title="Instagram">IG</a>
+      <a href="https://youtube.com/@gabrieldanciu.coach" class="social-link" target="_blank" title="YouTube">YT</a>
+      <a href="https://gabrieldanciu.substack.com" class="social-link" target="_blank" title="Substack">SS</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Gabriel Danciu · Basic Fit Yser, Bruxelles</div>
+    <div class="footer-copy">Certifié EREPS Niveau 4 · Strength & Conditioning</div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn){
+  const a=btn.nextElementSibling,icon=btn.querySelector('.faq-icon');
+  const isOpen=a.classList.contains('open');
+  document.querySelectorAll('.faq-a.open').forEach(el=>el.classList.remove('open'));
+  document.querySelectorAll('.faq-icon.open').forEach(el=>el.classList.remove('open'));
+  if(!isOpen){a.classList.add('open');icon.classList.add('open')}
+}
+
+function submitForm(){
+  const n=document.getElementById('cf-name').value.trim();
+  const e=document.getElementById('cf-email').value.trim();
+  const m=document.getElementById('cf-msg').value.trim();
+  const fb=document.getElementById('form-feedback');
+  fb.className='form-msg';
+  if(!n||!e||!m){fb.textContent='Merci de remplir au moins votre nom, email et message.';fb.className='form-msg error';return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){fb.textContent='Adresse email invalide.';fb.className='form-msg error';return}
+  fb.textContent='Message envoyé ! Gabriel vous répond sous 24h.';fb.className='form-msg success';
+  document.getElementById('cf-name').value='';
+  document.getElementById('cf-email').value='';
+  document.getElementById('cf-service').value='';
+  document.getElementById('cf-msg').value='';
+}
+</script>
+</body>
+</html>
